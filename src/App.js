@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+// import { useRef } from 'react';
+import { data } from './data';
+import './styles/app.css'
 
-function App() {
+const App = () => {
+  const GroupRef = useRef([]);
+
+  const onScroll = (el) => {
+    const styles = GroupRef.current.map((group, i) => {
+      const rect = group.getBoundingClientRect();
+
+      return { group, rect }
+    }).find((group) => group.rect.bottom >= window.innerHeight * 0.5);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+        {data.map((group, i) => (
+          <div className='sectionContainer'>
+            <h1>{group.title}</h1>
+            <p>{group.paragraph}</p>
+          </div>
+        ))}
+      </div>
   );
 }
 
