@@ -1,0 +1,4 @@
+body {
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
